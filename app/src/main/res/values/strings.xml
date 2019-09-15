@@ -1,18 +1,17 @@
 <resources>
     <string name="app_name">ConstraintToolbox</string>
-    <string name="checkBox1">Red</string>
-    <string name="checkBox2">Blue</string>
-    <string name="checkBox3">Green</string>
+    <string name="checkBox1">Red </string>
+    <string name="checkBox2">Green </string>
+    <string name="checkBox3">Blue </string>
     <string name="radio1">Increase</string>
-    <string name="radio2">Decrease</string>
-    <string name="toggle">On/Off </string>
-    <string-array name="choose">
-        <item>White</item>
-        <item>Black</item>
-        <item>Red</item>
-        <item>Red</item>
-        <item>Red</item>
-        <item>Red</item>
-        <item>Red</item>
+    <string name="radio2">Decrease </string>
+    <string name="toggle"> On/Off </string>
+    <string name="button">SET COLOR</string>
+    <string-array name="dropdown">
+        <item>255,255,255</item>
+        <item>0,0,0</item>
+        <item>255,0,0</item>
+        <item>0,255,0</item>
+        <item>0,0,255</item>
     </string-array>
 </resources>

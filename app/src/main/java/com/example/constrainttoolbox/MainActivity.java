@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import static android.graphics.Color.rgb;
@@ -16,9 +17,9 @@ import static android.graphics.Color.rgb;
 public class MainActivity extends AppCompatActivity {
     private boolean wasRunning = false;
     private boolean running = false;
-    private int redVal = 000;
-    private int greenVal = 000;
-    private int blueVal = 000;
+    private int redVal = 255;
+    private int greenVal = 255;
+    private int blueVal = 255;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +45,18 @@ public class MainActivity extends AppCompatActivity {
         Spinner dropdown = findViewById(R.id.dropdown);
         ConstraintLayout layout = findViewById(R.id.layout);
 
-        //String chosen = dropdown.getSelectedItem().toString();
+        String chosen = dropdown.getSelectedItem().toString();
+        String[] colors = chosen.split(",");
 
-        layout.setBackgroundColor(rgb(255, 0, 0));
+        layout.setBackgroundColor(rgb(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2])));
     }
 
-    public void colorsOn(View v){
-        running = true;
-    }
-
-    public void colorsOff(View v){
-        running = false;
+    public void colorsToggle(View v){
+        if(running){
+            running = false;
+        } else {
+            running = true;
+        }
     }
 
     @Override
@@ -88,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox checkRed = findViewById(R.id.checkBox1);
         final CheckBox checkGreen = findViewById(R.id.checkBox2);
         final CheckBox checkBlue = findViewById(R.id.checkBox3);
+        final RadioButton radio1 = findViewById(R.id.radio1);
         final ConstraintLayout layout = findViewById(R.id.layout);
 
         final Handler handler = new Handler();
@@ -97,22 +100,39 @@ public class MainActivity extends AppCompatActivity {
                 Boolean red = checkRed.isChecked();
                 Boolean green = checkGreen.isChecked();
                 Boolean blue = checkBlue.isChecked();
+                Boolean increase = radio1.isChecked();
 
-                if(red && redVal < 255){
-                    redVal++;
+                if(running) {
+                    if(increase) {
+                        if (red && redVal < 255) {
+                            redVal++;
+                        }
+
+                        if (green && greenVal < 255) {
+                            greenVal++;
+                        }
+
+                        if (blue && blueVal < 255) {
+                            blueVal++;
+                        }
+                    } else {
+                        if (red && redVal > 0) {
+                            redVal--;
+                        }
+
+                        if (green && greenVal > 0) {
+                            greenVal--;
+                        }
+
+                        if (blue && blueVal > 0) {
+                            blueVal--;
+                        }
+                    }
+
+                    layout.setBackgroundColor(rgb(redVal, greenVal, blueVal));
                 }
 
-                if(green && greenVal < 255){
-                    greenVal++;
-                }
-
-                if(blue && blueVal < 255){
-                    blueVal++;
-                }
-
-                layout.setBackgroundColor(rgb(redVal, greenVal, blueVal));
-
-                handler.postDelayed(this, 10);
+                handler.postDelayed(this, 50);
             }
         });
     }
