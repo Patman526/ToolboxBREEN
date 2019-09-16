@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import static android.graphics.Color.rgb;
 
@@ -52,10 +53,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void colorsToggle(View v){
-        if(running){
-            running = false;
-        } else {
+        Switch toggle = findViewById(R.id.switch1);
+        Boolean toggleBool = toggle.isChecked();
+
+        if(toggleBool){
             running = true;
+        } else {
+            running = false;
         }
     }
 
